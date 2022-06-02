@@ -12,68 +12,99 @@ class DoctorMaterial extends StatefulWidget {
 }
 
 class _DoctorMaterialState extends State<DoctorMaterial> {
+  String? _selectedLocation;
+  String dropdownvalue = 'Bangalore';
+  List dropDownList = [
+    'Bangalore',
+    'Mumbai',
+    'Delhi',
+  ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Container(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 30,
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  'Find & Book',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400),
-                ),
-                Spacer(),
-                Column(
+                child: Row(
                   children: [
-                    Text(
-                      'Location',
-                      style: TextStyle(
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
                         color: Colors.white,
-                        fontSize: 15,
+                        size: 30,
                       ),
                     ),
-                    Row(
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Find & Book',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    Spacer(),
+                    Column(
                       children: [
                         Text(
-                          'Bangalore',
+                          'Location',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                           ),
                         ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.white,
-                          size: 25.0,
+                        DropdownButton<String>(icon: Icon(Icons.arrow_drop_down,color: Colors.white,),
+                          value: _selectedLocation,
+                          hint: Text('Bangalore',style: TextStyle(color: Colors.white),),
+                          items: dropDownList
+                              .map(
+                                (e) => DropdownMenuItem<String>(
+                              value: e,
+                              child: Text(
+                                e.toString(),
+                              ),
+                            ),
+                          )
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedLocation = value!;
+                            });
+                          },
                         ),
+
+                        // Row(
+                        //   children: [
+                        //     Text(
+                        //       'Bangalore',
+                        //       style: TextStyle(
+                        //         color: Colors.white,
+                        //         fontSize: 15,
+                        //       ),
+                        //     ),
+                        //     Icon(
+                        //       Icons.arrow_drop_down,
+                        //       color: Colors.white,
+                        //       size: 25.0,
+                        //     ),
+                        //   ],
+                        // ),
                       ],
-                    ),
+                    )
                   ],
-                )
-              ],
-            ),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+                ),
+              ),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.black12,
@@ -215,28 +246,28 @@ class _DoctorMaterialState extends State<DoctorMaterial> {
             ],
           ),
         ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          child: InkWell(
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => PersonalDetails()));
-            },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                //borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Colors.lightBlue,
-              ),
-              child: Center(
-                child: Text(
-                  'Contiune',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => PersonalDetails()));
+          },
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              //borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Colors.lightBlue,
+            ),
+            child: Center(
+              child: Text(
+                'Contiune',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white),
+                textAlign: TextAlign.center,
               ),
             ),
           ),

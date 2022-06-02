@@ -66,7 +66,7 @@ class _PractoCareState extends State<PractoCare> {
                     SizedBox(
                       width: 10,
                     ),
-                    Icon(Icons.account_balance_wallet_outlined),
+                    Icon(Icons.account_balance_wallet_outlined,color: Colors.black,),
                   ],
                 ),
                 SizedBox(
@@ -77,9 +77,10 @@ class _PractoCareState extends State<PractoCare> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     children: [
-                      Icon(Icons.location_on, size: 20),
-                      DropdownButton<String>(
+                      Icon(Icons.location_on, size: 20,color: Colors.lightBlueAccent,),
+                      DropdownButton<String>(icon: Icon(Icons.arrow_drop_down_outlined,color: Colors.black,size: 40),
                         value: _selectedLocation,
+                        hint: Text('Bangalore'),
                         items: dropDownList
                             .map(
                               (e) => DropdownMenuItem<String>(

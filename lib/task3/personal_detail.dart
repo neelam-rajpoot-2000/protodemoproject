@@ -28,10 +28,15 @@ class _PersonalDetailsState extends State<PersonalDetails> {
               ),
               title: Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                    size: 30.0,
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
                   ),
                   SizedBox(
                     width: 10,

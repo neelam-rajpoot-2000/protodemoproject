@@ -16,10 +16,15 @@ class MobileNo extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back,
-                    color: Colors.black38,
-                    size: 25.0,
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black38,
+                      size: 25.0,
+                    ),
                   ),
                   Spacer(),
                   Icon(
