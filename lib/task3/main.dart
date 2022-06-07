@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:protodemoproject/task3/practo.dart';
 
+import 'developer.dart';
 import 'find_&_book.dart';
+import 'flipkart.dart';
 import 'personal.dart';
 import 'mobile_no.dart';
 import 'medical.dart';
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
    debugShowCheckedModeBanner: false,
-      home: PractoFile(),
+      home: ProfileFlutter(),
     );
   }
 }
