@@ -10,6 +10,8 @@ import 'mobile_no.dart';
 import 'medical.dart';
 import 'personal_detail.dart';
 import 'practo_care.dart';
+import 'bar.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
    debugShowCheckedModeBanner: false,
-      home: ProfileFlutter(),
+      home:  Box(),
     );
   }
 }

@@ -13,7 +13,18 @@ class PractoFile extends StatefulWidget {
 }
 
 class _PractoFileState extends State<PractoFile> {
+
+  TextEditingController _controller = TextEditingController();
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    _controller.dispose();
+    super.dispose();
+  }
+  bool _show = false;
   int _currentIndex = 0;
+
   final imgList = [
     'https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg?w=2000',
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -26,8 +37,10 @@ class _PractoFileState extends State<PractoFile> {
 
 
 
-  @override
+
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -42,13 +55,20 @@ class _PractoFileState extends State<PractoFile> {
                 ),
                 child: ListView(
                   children: [
-                    Text(
-                      'practo',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 45,
-                          fontWeight: FontWeight.w900),
+                    Row(
+                       children: [
+                         FlutterLogo(size: 50,),
+                         SizedBox(width: 10,),
+                         Text(
+                           'practo',
+                           style: TextStyle(
+                               color: Colors.white,
+                               fontSize: 45,
+                               fontWeight: FontWeight.w900),
+                         ),
+                       ],
                     ),
+
                     SizedBox(
                       height: 50,
                     ),
@@ -189,13 +209,18 @@ class _PractoFileState extends State<PractoFile> {
                             SizedBox(
                               width: 10,
                             ),
+
                             Expanded(
-                              child: const TextField(
+                              child:  TextField(
+                                controller: _controller,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   hintText: 'Mobile no.',
+
                                   border: InputBorder.none,
                                 ),
+
+
                               ),
                             ),
                           ],
@@ -203,7 +228,12 @@ class _PractoFileState extends State<PractoFile> {
                       ),
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _showModalBottomSheet();
+                          setState(() {
+
+                          });
+                        },
                         child: Text(
                           "Trouble signing in?",
                           style: TextStyle(
@@ -218,12 +248,20 @@ class _PractoFileState extends State<PractoFile> {
             ],
           ),
         ),
-        bottomNavigationBar: Padding(
+        bottomNavigationBar:Padding(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: InkWell(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => MobileNo()));
+              // _showDialogBox();
+              // Navigator.of(context)
+              //     .push(MaterialPageRoute(builder: (context) => MobileNo()));
+              if(_controller.text.isEmpty || _controller.text.length<=9){
+                _showDialogBox();
+              }
+              else{
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => MobileNo()));
+              }
             },
             child: Container(
               height: 50,
@@ -244,10 +282,124 @@ class _PractoFileState extends State<PractoFile> {
             ),
           ),
         ),
+         // bottomSheet: _showBottomSheet(),
       ),
     );
 
   }
+  _showDialogBox(){
+    return showDialog(
+      barrierDismissible: false,
+
+
+      context: context,
+      builder: (BuildContext context){
+        return Dialog(
+          elevation: 16,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(topRight: Radius.circular(20),bottomRight: Radius.circular(20))),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+             height: 230.0,
+
+
+            child: Column(
+              children: [
+              //  FlutterLogo(size: 50,),
+                ClipRRect(
+                  borderRadius:
+                  BorderRadius.circular(50),
+
+                  child: Image.network('https://picsum.photos/250?image=1',width: 50,height: 50,fit: BoxFit.cover),
+                ),
+                SizedBox(height: 5,),
+                Text('Are you sure,Check your Mobile number',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontFamily: 'helvetica_neue_light',
+                  ),
+                  textAlign: TextAlign.center,),
+                SizedBox(height: 5,),
+                Text('+91-XXXXXXXX45',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontFamily: 'helvetica_neue_light',
+                  ),
+                 ),
+               SizedBox(height: 30,),
+               Row(
+                // crossAxisAlignment: CrossAxisAlignment.s,
+                 mainAxisAlignment: MainAxisAlignment.end,
+                 mainAxisSize: MainAxisSize.max,
+                 children: [
+
+
+                   TextButton(
+                     onPressed: () => Navigator.pop(context, 'cancel'),
+                     child:  Text('Cancel',style: TextStyle(fontSize: 20),),
+                   ),
+                   TextButton(
+                     onPressed: () => Navigator.pop(context, 'ok'),
+                     child:  Text('OK',style: TextStyle(fontSize: 20)),
+                   ),
+
+                 ],
+               )
+              ],
+            ),
+
+          ),
+        );
+      },
+    );
+  }
+  _showModalBottomSheet()
+  {
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      context: context,
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius:
+                  BorderRadius.circular(50),
+
+                  child: Image.network('https://cdn.pixabay.com/photo/2016/03/27/19/43/samsung-1283938__340.jpg',width: 70,height: 70,fit: BoxFit.cover,alignment:Alignment.center),
+                ),
+
+                ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('Send email'),
+                  onTap: () {
+                    print('Send email');
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.phone),
+                  title: Text('Call phone'),
+                  onTap: () {
+                    print('Call phone');
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+    );
+  }
 }
+
 
 

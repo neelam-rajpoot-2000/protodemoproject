@@ -18,7 +18,7 @@ class _ProfileFlutterState extends State<ProfileFlutter> {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20),
           decoration: BoxDecoration(
-            color: Colors.green[900],
+            color: Colors.green,
           ),
           child: Center(
             child: Column(
@@ -52,7 +52,7 @@ class _ProfileFlutterState extends State<ProfileFlutter> {
                 Divider(
                   thickness: 3,
                   indent: 40,
-                  endIndent: 40,
+                  endIndent: 40 ,
                   color: Colors.white,
                 ),
                 SizedBox(
@@ -122,7 +122,7 @@ class _ProfileFlutterState extends State<ProfileFlutter> {
                       'Designed and Developed by Neelam Rajpoot Want to contact ?',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
@@ -134,21 +134,7 @@ class _ProfileFlutterState extends State<ProfileFlutter> {
           ),
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   margin: EdgeInsets.all(3),
-      //   height: 60,
-      //   width: double.infinity,
-      //
-      //   decoration: BoxDecoration(
-      //     color: Colors.greenAccent,
-      //   ),
-      //   child: TextButton(
-      //     onPressed: (){},
-      //     child: Text('Designed and Developed by Neelam Rajpoot Want to contact ?',
-      //       textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 16,),),
-      //   ),
-      //
-      // ),
+
     ));
   }
 }
